@@ -2,7 +2,8 @@
 
 small CRUD app, which demonstrates basic database operations
 
-## How to run test
+## How to run tests
+
 
 run "npm test" command
 
