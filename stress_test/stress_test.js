@@ -33,13 +33,13 @@ export default () => {
 
         'is status 200': (r) => r.status===200,//check 1
 
-        'response body contains Book1': (r)=>
+        'response body contains body': (r)=>
 
-            r.body.includes('Book1'),//check 2
+            r.body.includes('body'),//check 2
 
-        'response body contains Book3': (r)=>
+        'response body contains updated body': (r)=>
 
-            r.body.includes('Book3'),//check 3
+            r.body.includes('updated body'),//check 3
 
     });
 
