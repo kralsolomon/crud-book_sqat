@@ -1,8 +1,8 @@
 
-let Book = require("../models/Book");
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-let app = require("../app");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const app = require("../app");
+const Book = require("../models/Book");
 chai.should();
 
 chai.use(chaiHttp);
@@ -13,7 +13,13 @@ describe("Books", () => {
       done();
     });
   });
-  describe("/GET book", () => {
+
+//
+//
+//
+// unit test for getBook method
+    
+  describe("getAllBooks_unit_test", () => {
     it("it should GET all the books", (done) => {
       chai
         .request(app)
@@ -26,13 +32,17 @@ describe("Books", () => {
         });
     });
   });
-  describe("/POST book", () => {
+
+
+//
+//
+//
+// unit test for createBook method
+  describe("createBook_unit_test", () => {
     it("it should new POST a book", (done) => {
       let book = {
-        title: "This is the first book",
-        body: "This is a book post",
-        image:
-          "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        title: "unit_test title",
+        body: "unit_test body"
       };
       chai
         .request(app)
@@ -46,13 +56,17 @@ describe("Books", () => {
         });
     });
   });
-  describe("/GET/:id book", () => {
+
+
+//
+//
+//
+// unit test for getBookById method
+  describe("getBookById_unit_test", () => {
     it("it should GET a book by the id", (done) => {
       let book = new Book({
-        title: "This is the first book",
-        body: "This is a book post",
-        image:
-          "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        title: "unit_test title",
+        body: "unit_test body"
       });
       book.save((err, book) => {
         chai
@@ -68,41 +82,48 @@ describe("Books", () => {
       });
     });
   });
-  describe("/PUT/:id book", () => {
+
+
+//
+//
+//
+// unit test for updateBook method
+  describe("updateBook_unit_test", () => {
     it("it should UPDATE a book given the id", (done) => {
       let book = new Book({
-        title: "This is the first book",
-        body: "This is a book post",
-        image:
-          "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        title: "unit_test title",
+        body: "unit_test body"
       });
+
       book.save((err, book) => {
         console.log(book.id);
         chai
           .request(app)
           .put("/api/books/" + book.id)
           .send({
-            title: "The first book was updated",
-            body: "This is a book post",
-            image:
-              "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            title: "The title was updated",
+            body: "This body was updated"
           })
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a("object");
-            res.body.status.should.be.eql("success");
+            res.body.status.should.be.eql("updated");
             done();
           });
       });
     });
   });
-  describe("/DELETE/:id book", () => {
+
+
+//
+//
+//
+// unit test for deleteBook method
+  describe("deleteBook_unit_test", () => {
     it("it should DELETE a book given the id", (done) => {
       let book = new Book({
-        title: "This is the first book",
-        body: "This is a book post",
-        image:
-          "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        title: "unit_test title",
+        body: "unit_test body"
       });
       book.save((err, book) => {
         chai
@@ -111,7 +132,7 @@ describe("Books", () => {
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a("object");
-            res.body.status.should.be.eql("success");
+            res.body.status.should.be.eql("successfully deleted");
             done();
           });
       });

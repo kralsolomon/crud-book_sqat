@@ -30,7 +30,7 @@ exports.getBookById = async (req, res) => {
 exports.updateBook = async (req, res) => {
   try {
     const book = await bookService.updateBook(req.params.id, req.body);
-    res.json({ data: book, status: "success" });
+    res.json({ data: book, status: "updated" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -39,7 +39,7 @@ exports.updateBook = async (req, res) => {
 exports.deleteBook = async (req, res) => {
   try {
     const book = await bookService.deleteBook(req.params.id);
-    res.json({ data: book, status: "success" });
+    res.json({ data: book, status: "successfully deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
