@@ -28,7 +28,7 @@ export default () => {
     const res = http.get('http://localhost:3000/api/books', {
 
     });           //call the api and set the response to res
-
+ 
     check(res, {
 
         'is status 200': (r) => r.status===200,//check 1
